@@ -9,7 +9,6 @@ A simple RESTful API for managing tasks with CRUD operations, built with Node.js
 
 ## Requirements
 - Node.js (v18 or higher)
-- Docker (optional, for containerized deployment)
 
 ## Installation
    ```bash
