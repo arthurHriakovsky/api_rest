@@ -16,5 +16,5 @@ A simple RESTful API for managing tasks with CRUD operations, built with Node.js
    git clone https://github.com/arthurHriakovsky/api_rest.git
    cd api_rest or cd <repository-directory>
    npm install
-   node app.js
+   npm start
 
