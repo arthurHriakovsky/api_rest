@@ -1,0 +1,148 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Task Management API",
+    "version" : "1.0.0",
+    "description" : "API לניהול משימות"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:3000",
+    "description" : "Local server"
+  } ],
+  "paths" : {
+    "/tasks" : {
+      "get" : {
+        "summary" : "Get all tasks",
+        "responses" : {
+          "200" : {
+            "description" : "List of tasks",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Task"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "יצירת משימה חדשה",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TaskInput"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "משימה נוצרה בהצלחה",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}" : {
+      "put" : {
+        "summary" : "עדכון משימה",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TaskInput"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "משימה עודכנה",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "מחיקת משימה",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "משימה נמחקה בהצלחה"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Task" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "dueDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        }
+      },
+      "TaskInput" : {
+        "type" : "object",
+        "properties" : {
+          "description" : {
+            "type" : "string"
+          },
+          "dueDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "description", "dueDate", "status" ]
+      }
+    }
+  }
+}
