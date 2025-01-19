@@ -14,6 +14,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
 app.use(basicTasksRoutes);
 
+//option to choose swagger inretface
 app.get("/", (req, res) => {
   res.send(`
     <h1> Task Management API</h1>
